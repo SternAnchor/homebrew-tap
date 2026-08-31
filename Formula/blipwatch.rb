@@ -8,13 +8,13 @@ class Blipwatch < Formula
   depends_on "node"
 
   def install
-    system "npm", "install", *std_npm_args(libexec)
+    system "npm", "install", *std_npm_args(prefix: libexec)
     bin.install_symlink libexec/"bin/blipwatch" => "blipwatch"
   end
 
   test do
     package = libexec/"lib/node_modules/blipwatch/package.json"
-    assert_predicate package, :exist?
+    assert_path_exists package
     assert_match version.to_s, package.read
   end
 end
